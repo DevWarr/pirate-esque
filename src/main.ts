@@ -1,6 +1,7 @@
 import { Application, Sprite, Texture } from "pixi.js";
 import "./style.css";
-import { handleMovement } from "./handleMovement";
+import { Direction, handleMovement } from "./handleMovement";
+import { MovingSquare } from "./MovingSquare";
 
 console.log("hello world");
 const app = new Application();
@@ -13,17 +14,27 @@ background.width = app.canvas.width;
 background.height = app.canvas.height;
 background.tint = 0x6666ff;
 
-const square = Sprite.from(Texture.WHITE)
-square.width = 25;
-square.height = 25;
-square.tint = 0xff0000;
-square.x = app.renderer.width * 0.5;
-square.y = app.renderer.height * 0.5;
-square.anchor.x = square.anchor.y = 0.5;
+const square = new MovingSquare(Direction.DOWN_RIGHT, Texture.WHITE)
+square.sprite.width = 25;
+square.sprite.height = 25;
+square.sprite.tint = 0xff0000;
+square.sprite.x = app.renderer.width * 0.5;
+square.sprite.y = app.renderer.height * 0.5;
+square.sprite.anchor.x = square.sprite.anchor.y = 0.5;
+
+let isPaused = false
+
+document.onkeydown = (event: KeyboardEvent) => {
+    if (event.key === " ") {
+        isPaused = !isPaused;
+    }
+}
 
 app.stage.addChild(background);
-app.stage.addChild(square);
+app.stage.addChild(square.sprite);
 
 app.ticker.add(() => {
+    if (isPaused) return;
+
     handleMovement(square, app);
 })
