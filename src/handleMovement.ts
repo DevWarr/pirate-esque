@@ -1,5 +1,5 @@
 import { Application, Bounds } from "pixi.js";
-import { MovingSquare } from "./MovingSquare";
+import { MovingSprite } from "./MovingSprite";
 
 export enum Direction {
   DOWN_RIGHT,
@@ -46,7 +46,7 @@ const isObjectInBounds = (objectBounds: Bounds, appCanvas: DOMRect) => {
   )
 }
 
-export const handleMovement = (objectToMove: MovingSquare, app: Application) => {
+export const handleMovement = (objectToMove: MovingSprite, app: Application) => {
   const vectorForDirection = directionToTranslation[objectToMove.directionToMove]
   objectToMove.sprite.x += vectorForDirection.x;
   objectToMove.sprite.y += vectorForDirection.y;

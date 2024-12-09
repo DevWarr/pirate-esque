@@ -1,7 +1,7 @@
-import { Application, Sprite, Texture } from "pixi.js";
+import { Application, Assets, Sprite, Spritesheet, Texture } from "pixi.js";
 import "./style.css";
 import { Direction, handleMovement } from "./handleMovement";
-import { MovingSquare } from "./MovingSquare";
+import { MovingSprite } from "./MovingSprite";
 
 console.log("hello world");
 const app = new Application();
@@ -9,18 +9,16 @@ await app.init();
 
 document.getElementById("app")!.appendChild(app.canvas);
 
+const spriteSheet: Spritesheet = await Assets.load("../assets/sprites/spritesheet_updated.json");
+
 const background = Sprite.from(Texture.WHITE);
 background.width = app.canvas.width;
 background.height = app.canvas.height;
 background.tint = 0x6666ff;
 
-const square = new MovingSquare(Direction.DOWN_RIGHT, Texture.WHITE)
-square.sprite.width = 25;
-square.sprite.height = 25;
-square.sprite.tint = 0xff0000;
-square.sprite.x = app.renderer.width * 0.5;
-square.sprite.y = app.renderer.height * 0.5;
-square.sprite.anchor.x = square.sprite.anchor.y = 0.5;
+const shipRightTexture = spriteSheet.textures["spritesheet_layer-boat-right_frame-0"];
+
+const shipRightSprite = new MovingSprite(Direction.DOWN_RIGHT, new Sprite(shipRightTexture))
 
 let isPaused = false
 
@@ -31,10 +29,10 @@ document.onkeydown = (event: KeyboardEvent) => {
 }
 
 app.stage.addChild(background);
-app.stage.addChild(square.sprite);
+app.stage.addChild(shipRightSprite.sprite);
 
 app.ticker.add(() => {
     if (isPaused) return;
 
-    handleMovement(square, app);
+    handleMovement(shipRightSprite, app);
 })
