@@ -13,7 +13,7 @@ const DIRECTION_ORDER = [
   Direction.UP_RIGHT,
   Direction.UP_LEFT,
   Direction.DOWN_LEFT,
-]
+];
 
 export interface Vector2 {
   x: number;
@@ -37,23 +37,35 @@ const isObjectInBounds = (objectBounds: Bounds, appCanvas: DOMRect) => {
     canvasLeft: 0,
     canvasTop: 0,
     canvasRight: appCanvas.width,
-  })
+  });
   return (
     objectBounds.top > 0 &&
     objectBounds.bottom < appCanvas.height &&
     objectBounds.right < appCanvas.width &&
     objectBounds.left > 0
-  )
-}
+  );
+};
 
-export const handleMovement = (objectToMove: MovingSprite, app: Application) => {
-  const vectorForDirection = directionToTranslation[objectToMove.directionToMove]
+export const handleMovement = (
+  objectToMove: MovingSprite,
+  app: Application,
+) => {
+  const vectorForDirection =
+    directionToTranslation[objectToMove.directionToMove];
   objectToMove.sprite.x += vectorForDirection.x;
   objectToMove.sprite.y += vectorForDirection.y;
 
-  if (!isObjectInBounds(objectToMove.sprite.getBounds(), app.canvas.getBoundingClientRect())) {
-    const indexOfDirectionOrder = DIRECTION_ORDER.findIndex(direction => direction === objectToMove.directionToMove);
-    const newDirectionIndex = (indexOfDirectionOrder + 1) % DIRECTION_ORDER.length;
+  if (
+    !isObjectInBounds(
+      objectToMove.sprite.getBounds(),
+      app.canvas.getBoundingClientRect(),
+    )
+  ) {
+    const indexOfDirectionOrder = DIRECTION_ORDER.findIndex(
+      (direction) => direction === objectToMove.directionToMove,
+    );
+    const newDirectionIndex =
+      (indexOfDirectionOrder + 1) % DIRECTION_ORDER.length;
     console.log({ newDirectionIndex });
     objectToMove.directionToMove = DIRECTION_ORDER[newDirectionIndex];
   }
