@@ -1,15 +1,8 @@
 import fs from "fs";
-import { ObservablePoint } from "pixi.js";
-
-interface SizeVector2 {
-  w: number;
-  h: number;
-}
-
-interface ObservablePointWithSize extends ObservablePoint, SizeVector2 {}
+import { PositionAndSizeVector, SizeVector2 } from "../gameTypes";
 
 interface SpriteInfo {
-  frame: ObservablePointWithSize;
+  frame: PositionAndSizeVector;
   rotated: boolean;
   trimmed: boolean;
   sourceSize: SizeVector2;
@@ -22,7 +15,7 @@ interface SpriteInfoWithName extends SpriteInfo {
 
 interface KeyframeInfo {
   frame: number;
-  bounds: ObservablePointWithSize;
+  bounds: PositionAndSizeVector;
 }
 
 interface SliceInfo {
@@ -39,10 +32,7 @@ interface SliceInfo {
 const PATH_TO_PROJECT_ROOT = process.argv[2] ?? "../..";
 
 // Load the JSON file
-const rawData: string = fs.readFileSync(
-  `${PATH_TO_PROJECT_ROOT}/assets/sprites/spritesheet.json`,
-  "utf8",
-);
+const rawData: string = fs.readFileSync(`${PATH_TO_PROJECT_ROOT}/assets/sprites/spritesheet.json`, "utf8");
 
 //eslint-disable-next-line
 const json: Record<string, any> = JSON.parse(rawData);
@@ -69,10 +59,7 @@ frames.forEach((frame) => {
 
   if (matchingSlice) {
     // Create a new filename with the slice's name
-    const newFilename = frame.filename.replace(
-      "layer-",
-      `layer-${matchingSlice.name}`,
-    );
+    const newFilename = frame.filename.replace("layer-", `layer-${matchingSlice.name}`);
 
     // Add the frame to the updatedFrames object using the filename as the key
     updatedFrames[newFilename] = {
@@ -94,9 +81,6 @@ frames.forEach((frame) => {
 json.frames = updatedFrames;
 
 // Save the updated JSON to a new file
-fs.writeFileSync(
-  `${PATH_TO_PROJECT_ROOT}/assets/sprites/spritesheet_updated.json`,
-  JSON.stringify(json, null, 2),
-);
+fs.writeFileSync(`${PATH_TO_PROJECT_ROOT}/assets/sprites/spritesheet_updated.json`, JSON.stringify(json, null, 2));
 
 console.log("Updated JSON saved as spritesheet_updated.json");
