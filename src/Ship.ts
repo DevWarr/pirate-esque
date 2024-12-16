@@ -133,11 +133,11 @@ export class Ship {
 
     const directionToMove = this.controller.directionButtonDown;
     if (directionToMove === null) return;
+    this.updateVisibleSprite(directionToMove);
 
     const potentialNewPosition = this.calculateNewPosition(directionToMove);
     if (!Map.isLand(potentialNewPosition)) {
       this._isMoving = true;
-      this.updateVisibleSprite(directionToMove);
       this.updateMapPosition(potentialNewPosition);
     }
   }
