@@ -1,39 +1,41 @@
-import { Application, Container, Sprite } from "pixi.js";
+import { Application, Container } from "pixi.js";
 import "./style.css";
-import { Direction } from "./handleMovement";
-import { MovingSprite } from "./MovingSprite";
-import { TextureKey, TextureManager } from "./TextureManager";
+import { TextureManager } from "./TextureManager";
 import { Map, startingMapArray } from "./Map";
+import { Controller } from "./controllers/Controller";
+import { Ship } from "./Ship";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
-await app.init({ width: 256, height: 224 });
+await app.init({ width: 320, height: 240 });
 app.renderer.view.resolution = 3;
 
 document.getElementById("app")!.appendChild(app.canvas);
 
-const shipRightSprite = new MovingSprite(
-  Direction.DOWN_RIGHT,
-  new Sprite(TextureManager.getTexture(TextureKey.SHIP_RIGHT)),
-);
-
 let isPaused = false;
-
-document.onkeydown = (event: KeyboardEvent) => {
-  if (event.key === " ") {
-    isPaused = !isPaused;
-  }
-};
+const playerController = new Controller();
 
 const mapLayer = new Container();
 app.stage.addChild(mapLayer);
 
-const underLayerSprites = Map.buildSpriteMap(startingMapArray);
+Map.tileMap = startingMapArray;
+const underLayerSprites = Map.buildSpriteMap();
 Map.updateContainerWithNewMapSprites(mapLayer, underLayerSprites);
 
-app.stage.addChild(shipRightSprite.sprite);
+const shipLayer = new Container();
+app.stage.addChild(shipLayer);
+
+const ship = new Ship(playerController);
+ship.placeShipsInContainer(shipLayer);
 
 app.ticker.add(() => {
-  // if (isPaused) return;
-  // handleMovement(shipRightSprite, app);
+  playerController.update();
+  if (playerController.isPauseButtonPressed) isPaused = !isPaused;
+
+  if (isPaused) {
+    // If we're paused, no more movement
+    return;
+  }
+
+  ship.update();
 });
