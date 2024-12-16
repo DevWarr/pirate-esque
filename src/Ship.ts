@@ -111,7 +111,6 @@ export class Ship {
       Math.abs(this.mapPosition.y * Ship.SIZE_OF_SPRITE - newSpritePosition.y) >= Ship.SIZE_OF_SPRITE ||
       this._currentAnimationFrame >= Ship.TOTAL_ANIMATION_FRAMES
     ) {
-      console.log({ ...newSpritePosition });
       // If we're at the end of the animation, or the ship's sprite would be sent past its intended destination,
       // Put the sprite at it's destination, and stop moving
       this.updateSpritePosition({
