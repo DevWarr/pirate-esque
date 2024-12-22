@@ -15,6 +15,9 @@ export enum TextureKey {
   SHIP_LEFT = "SHIP_LEFT",
   SHIP_DOWN = "SHIP_DOWN",
   SHIP_UP = "SHIP_UP",
+  HAZARD_WHIRLPOOL = "HAZARD_WHIRLPOOL",
+  ITEM_HEALTH_BARREL = "ITEM_HEALTH_BARREL",
+  ITEM_MAP_PIECE = "ITEM_MAP_PIECE",
 }
 
 export class TextureManager {
@@ -50,6 +53,11 @@ export class TextureManager {
       [TextureKey.SHIP_LEFT]: spritesheet.textures["spritesheet_layer-boat-left_frame-0"],
       [TextureKey.SHIP_UP]: spritesheet.textures["spritesheet_layer-boat-up_frame-0"],
       [TextureKey.SHIP_DOWN]: spritesheet.textures["spritesheet_layer-boat-down_frame-0"],
+      // Hazard textures
+      [TextureKey.HAZARD_WHIRLPOOL]: spritesheet.textures["spritesheet_layer-whirlpool_frame-0"],
+      // Item
+      [TextureKey.ITEM_HEALTH_BARREL]: spritesheet.textures["spritesheet_layer-health-barrel_frame-0"],
+      [TextureKey.ITEM_MAP_PIECE]: spritesheet.textures["spritesheet_layer-map-piece_frame-0"],
     };
   }
 

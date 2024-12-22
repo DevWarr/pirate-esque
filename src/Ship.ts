@@ -2,7 +2,7 @@ import { Container, PointData, Sprite } from "pixi.js";
 import { TextureKey, TextureManager } from "./TextureManager";
 import { PositionVector2 } from "./gameTypes";
 import { Controller, ControllerButton } from "./controllers/Controller";
-import { Map } from "./Map";
+import { MapManager } from "./managers/MapManager";
 
 /** type for the Ship direction. Dependent on the ControllerButton enum */
 type ShipDirection = Extract<
@@ -79,13 +79,19 @@ export class Ship {
   private calculateNewPosition(direction: ShipDirection): PositionVector2 {
     switch (direction) {
       case ControllerButton.RIGHT:
-        return { x: (this._mapPosition.x + 1) % Map.tileMapSize.w, y: this._mapPosition.y };
+        return { x: (this._mapPosition.x + 1) % MapManager.tileMapSize.w, y: this._mapPosition.y };
       case ControllerButton.LEFT:
-        return { x: (Map.tileMapSize.w + this._mapPosition.x - 1) % Map.tileMapSize.w, y: this._mapPosition.y };
+        return {
+          x: (MapManager.tileMapSize.w + this._mapPosition.x - 1) % MapManager.tileMapSize.w,
+          y: this._mapPosition.y,
+        };
       case ControllerButton.DOWN:
-        return { x: this._mapPosition.x, y: (this._mapPosition.y + 1) % Map.tileMapSize.h };
+        return { x: this._mapPosition.x, y: (this._mapPosition.y + 1) % MapManager.tileMapSize.h };
       case ControllerButton.UP:
-        return { x: this._mapPosition.x, y: (Map.tileMapSize.h + this._mapPosition.y - 1) % Map.tileMapSize.h };
+        return {
+          x: this._mapPosition.x,
+          y: (MapManager.tileMapSize.h + this._mapPosition.y - 1) % MapManager.tileMapSize.h,
+        };
     }
   }
 
@@ -136,7 +142,7 @@ export class Ship {
     this.updateVisibleSprite(directionToMove);
 
     const potentialNewPosition = this.calculateNewPosition(directionToMove);
-    if (!Map.isLand(potentialNewPosition)) {
+    if (!MapManager.isLand(potentialNewPosition)) {
       this._isMoving = true;
       this.updateMapPosition(potentialNewPosition);
     }
