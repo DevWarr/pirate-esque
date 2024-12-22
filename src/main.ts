@@ -1,35 +1,48 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
 import "./style.css";
-import { TextureManager } from "./TextureManager";
-import { Map, startingMapArray } from "./Map";
+import { TextureManager } from "./managers/TextureManager";
+import { TerrainManager } from "./managers/TerrainManager";
 import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
+import { ItemManager } from "./managers/ItemManager";
+import { HazardManager } from "./managers/HazardManager";
+import { startingMapArray } from "./mapLayout";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
 await app.init({ width: 320, height: 240 });
 app.renderer.view.resolution = 3;
-
 document.getElementById("app")!.appendChild(app.canvas);
-
-let isPaused = false;
-const playerController = new Controller();
 
 const mapLayer = new Container();
 app.stage.addChild(mapLayer);
 
-Map.tileMap = startingMapArray;
-const underLayerSprites = Map.buildSpriteMap();
-Map.updateContainerWithNewMapSprites(mapLayer, underLayerSprites);
+TerrainManager.buildTerrainMap(startingMapArray);
+TerrainManager.updateContainerWithNewMapSprites(mapLayer);
+
+const hazardLayer = new Container();
+app.stage.addChild(hazardLayer);
+
+HazardManager.buildHazardMap(startingMapArray);
+HazardManager.updateContainerWithNewMapSprites(hazardLayer);
+
+const itemLayer = new Container();
+app.stage.addChild(itemLayer);
+
+ItemManager.buildItemMap(startingMapArray);
+ItemManager.updateContainerWithNewMapSprites(itemLayer);
 
 const shipLayer = new Container();
 app.stage.addChild(shipLayer);
 
+const playerController = new Controller();
 const ship = new Ship(playerController);
-ship.placeShipsInContainer(shipLayer);
+ship.placeShipInContainer(shipLayer);
 
 const pauseLayer = new Container();
 app.stage.addChild(pauseLayer);
+
+let isPaused = false;
 const foreground = new Sprite(Texture.WHITE);
 foreground.width = app.canvas.width;
 foreground.height = app.canvas.height;

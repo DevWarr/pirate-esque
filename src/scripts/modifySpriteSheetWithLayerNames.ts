@@ -1,5 +1,12 @@
 import fs from "fs";
-import { PositionAndSizeVector, SizeVector2 } from "../gameTypes";
+import { SizeVector2 } from "../models/SizeVector2";
+
+export interface PositionAndSizeVector {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
 
 interface SpriteInfo {
   frame: PositionAndSizeVector;
@@ -59,6 +66,7 @@ frames.forEach((frame) => {
 
   if (matchingSlice) {
     // Create a new filename with the slice's name
+    // expected file name: `spritesheet_layer-{layer}_frame-{frame}.png`
     const newFilename = frame.filename.replace("layer-", `layer-${matchingSlice.name}`);
 
     // Add the frame to the updatedFrames object using the filename as the key
