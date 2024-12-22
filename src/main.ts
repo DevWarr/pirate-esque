@@ -1,11 +1,12 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
 import "./style.css";
 import { TextureManager } from "./managers/TextureManager";
-import { TerrainManager, startingMapArray } from "./managers/TerrainManager";
+import { TerrainManager } from "./managers/TerrainManager";
 import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
 import { ItemManager } from "./managers/ItemManager";
 import { HazardManager } from "./managers/HazardManager";
+import { startingMapArray } from "./mapLayout";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
