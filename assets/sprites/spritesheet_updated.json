@@ -135,7 +135,7 @@
         "h": 16
       }
     },
-    "spritesheet_layer-water_frame-0": {
+    "spritesheet_layer-water-with-borders_frame-0": {
       "frame": {
         "x": 144,
         "y": 0,
@@ -150,7 +150,7 @@
         "h": 16
       }
     },
-    "spritesheet_layer-whirlpool_frame-0": {
+    "spritesheet_layer-water_frame-0": {
       "frame": {
         "x": 160,
         "y": 0,
@@ -165,7 +165,7 @@
         "h": 16
       }
     },
-    "spritesheet_layer-health-barrel_frame-0": {
+    "spritesheet_layer-water-with-waves_frame-0": {
       "frame": {
         "x": 176,
         "y": 0,
@@ -180,37 +180,7 @@
         "h": 16
       }
     },
-    "spritesheet_layer-map-piece_frame-0": {
-      "frame": {
-        "x": 192,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-boat-up_frame-0": {
-      "frame": {
-        "x": 208,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-boat-down_frame-0": {
+    "spritesheet_layer-whirlpool_frame-0": {
       "frame": {
         "x": 224,
         "y": 0,
@@ -225,7 +195,7 @@
         "h": 16
       }
     },
-    "spritesheet_layer-boat-left_frame-0": {
+    "spritesheet_layer-health-barrel_frame-0": {
       "frame": {
         "x": 240,
         "y": 0,
@@ -240,9 +210,69 @@
         "h": 16
       }
     },
-    "spritesheet_layer-boat-right_frame-0": {
+    "spritesheet_layer-map-piece_frame-0": {
       "frame": {
         "x": 256,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-up_frame-0": {
+      "frame": {
+        "x": 272,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-down_frame-0": {
+      "frame": {
+        "x": 288,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-left_frame-0": {
+      "frame": {
+        "x": 304,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-right_frame-0": {
+      "frame": {
+        "x": 320,
         "y": 0,
         "w": 16,
         "h": 16
@@ -262,14 +292,34 @@
     "image": "spritesheet.png",
     "format": "RGBA8888",
     "size": {
-      "w": 272,
+      "w": 336,
       "h": 16
     },
     "scale": "1",
     "frameTags": [],
     "layers": [
       {
+        "name": "Water with borders",
+        "opacity": 255,
+        "blendMode": "normal"
+      },
+      {
         "name": "Water",
+        "opacity": 255,
+        "blendMode": "normal"
+      },
+      {
+        "name": "Water with waves",
+        "opacity": 255,
+        "blendMode": "normal"
+      },
+      {
+        "name": "unused01",
+        "opacity": 255,
+        "blendMode": "normal"
+      },
+      {
+        "name": "unused02",
         "opacity": 255,
         "blendMode": "normal"
       },
@@ -356,7 +406,7 @@
     ],
     "slices": [
       {
-        "name": "water",
+        "name": "water-with-borders",
         "color": "#0000ffff",
         "keys": [
           {
@@ -377,7 +427,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 176,
+              "x": 240,
               "y": 0,
               "w": 16,
               "h": 16
@@ -392,7 +442,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 192,
+              "x": 256,
               "y": 0,
               "w": 16,
               "h": 16
@@ -407,7 +457,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 208,
+              "x": 272,
               "y": 0,
               "w": 16,
               "h": 16
@@ -422,7 +472,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 224,
+              "x": 288,
               "y": 0,
               "w": 16,
               "h": 16
@@ -527,7 +577,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 256,
+              "x": 320,
               "y": 0,
               "w": 16,
               "h": 16
@@ -587,7 +637,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 240,
+              "x": 304,
               "y": 0,
               "w": 16,
               "h": 16
@@ -602,7 +652,37 @@
           {
             "frame": 0,
             "bounds": {
+              "x": 224,
+              "y": 0,
+              "w": 16,
+              "h": 16
+            }
+          }
+        ]
+      },
+      {
+        "name": "water",
+        "color": "#0000ffff",
+        "keys": [
+          {
+            "frame": 0,
+            "bounds": {
               "x": 160,
+              "y": 0,
+              "w": 16,
+              "h": 16
+            }
+          }
+        ]
+      },
+      {
+        "name": "water-with-waves",
+        "color": "#0000ffff",
+        "keys": [
+          {
+            "frame": 0,
+            "bounds": {
+              "x": 176,
               "y": 0,
               "w": 16,
               "h": 16

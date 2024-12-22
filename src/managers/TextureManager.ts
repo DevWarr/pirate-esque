@@ -12,6 +12,8 @@ export enum TextureKey {
   TERRAIN_LAND_BOTTOM_CENTER = "TERRAIN_LAND_BOTTOM_CENTER",
   TERRAIN_LAND_BOTTOM_RIGHT = "TERRAIN_LAND_BOTTOM_RIGHT",
   TERRAIN_WATER = "TERRAIN_WATER",
+  TERRAIN_WATER_WITH_WAVES = "TERRAIN_WATER_WITH_WAVES",
+  TERRAIN_WATER_WITH_BORDERS = "TERRAIN_WATER_WITH_BORDERS",
 
   // Ship
   SHIP_RIGHT = "SHIP_RIGHT",
@@ -55,6 +57,8 @@ export class TextureManager {
       [TextureKey.TERRAIN_LAND_BOTTOM_CENTER]: spritesheet.textures["spritesheet_layer-land-bottom-center_frame-0"],
       [TextureKey.TERRAIN_LAND_BOTTOM_RIGHT]: spritesheet.textures["spritesheet_layer-land-bottom-right_frame-0"],
       [TextureKey.TERRAIN_WATER]: spritesheet.textures["spritesheet_layer-water_frame-0"],
+      [TextureKey.TERRAIN_WATER_WITH_BORDERS]: spritesheet.textures["spritesheet_layer-water-with-borders_frame-0"],
+      [TextureKey.TERRAIN_WATER_WITH_WAVES]: spritesheet.textures["spritesheet_layer-water-with-waves_frame-0"],
       // Ship textures
       [TextureKey.SHIP_RIGHT]: spritesheet.textures["spritesheet_layer-boat-right_frame-0"],
       [TextureKey.SHIP_LEFT]: spritesheet.textures["spritesheet_layer-boat-left_frame-0"],

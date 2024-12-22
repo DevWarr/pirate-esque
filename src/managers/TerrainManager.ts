@@ -18,10 +18,16 @@ export class TerrainManager {
     };
   }
 
+  private static getTerrainTileType(tileMap: MapTileKey[][], x: number, y: number) {
+    return tileMap[y][x][TerrainManager.mapKeyIndex] as TerrainTileType;
+  }
+
   private static getTexture(tileMap: MapTileKey[][], x: number, y: number) {
-    const terrainTileType: TerrainTileType = tileMap[y][x][TerrainManager.mapKeyIndex] as TerrainTileType;
+    const terrainTileType: TerrainTileType = this.getTerrainTileType(tileMap, x, y);
     if (terrainTileType === TerrainTileType.WATER) {
-      return TextureManager.getTexture(TextureKey.TERRAIN_WATER);
+      return TextureManager.getTexture(
+        Math.random() > 0.1 ? TextureKey.TERRAIN_WATER : TextureKey.TERRAIN_WATER_WITH_WAVES,
+      );
     }
 
     return TextureManager.getTexture(TextureKey.TERRAIN_LAND_CENTER_CENTER);
@@ -34,7 +40,7 @@ export class TerrainManager {
     this.terrainMap = tileMap.map((tileMapRow, yPosition) =>
       tileMapRow.map((_, xPosition) => {
         return {
-          tileType: tileMap[yPosition][xPosition][TerrainManager.mapKeyIndex] as TerrainTileType,
+          tileType: this.getTerrainTileType(tileMap, xPosition, yPosition),
           sprite: new Sprite({
             texture: this.getTexture(tileMap, xPosition, yPosition),
             x: this.sizeOfSprite * xPosition,
