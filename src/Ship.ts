@@ -1,5 +1,5 @@
 import { Container, PointData, Sprite } from "pixi.js";
-import { TextureKey, TextureManager } from "./TextureManager";
+import { TextureKey, TextureManager } from "./managers/TextureManager";
 import { PositionVector2 } from "./models/PositionVector2";
 import { Controller, ControllerButton } from "./controllers/Controller";
 import { TerrainManager } from "./managers/TerrainManager";

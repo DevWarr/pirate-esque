@@ -1,7 +1,7 @@
 import { Container, Sprite } from "pixi.js";
 import { SizeVector2 } from "../models/SizeVector2";
 import { PositionVector2 } from "../models/PositionVector2";
-import { TextureKey, TextureManager } from "../TextureManager";
+import { TextureKey, TextureManager } from "./TextureManager";
 import { Terrain, TerrainTileType } from "../models/Terrain";
 import { MapTileKey } from "../models/MapKey";
 

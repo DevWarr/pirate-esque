@@ -1,6 +1,6 @@
 import { Application, Container, Sprite, Texture } from "pixi.js";
 import "./style.css";
-import { TextureManager } from "./TextureManager";
+import { TextureManager } from "./managers/TextureManager";
 import { TerrainManager, startingMapArray } from "./managers/TerrainManager";
 import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
@@ -18,7 +18,7 @@ const playerController = new Controller();
 const mapLayer = new Container();
 app.stage.addChild(mapLayer);
 
-TerrainManager.buildSpriteMapFromMapTiles(startingMapArray);
+TerrainManager.buildTerrainMap(startingMapArray);
 TerrainManager.updateContainerWithNewMapSprites(mapLayer);
 
 const shipLayer = new Container();
