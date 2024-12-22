@@ -26,6 +26,7 @@ export const startingMapArray: MapTileKey[][] = [
 
 export class TerrainManager {
   private static mapKeyIndex = 0;
+  private static sizeOfSprite = 16;
   private static terrainMap: Terrain[][] = [[]];
 
   /** returns the size of the tileMap. Assumes the tileMap is a rectangle */
@@ -48,15 +49,15 @@ export class TerrainManager {
   /**
    * Updates this.spriteMap with the 2D array of tiles that should exist on the map
    */
-  public static buildSpriteMapFromMapTiles(tileMap: MapTileKey[][]): void {
+  public static buildTerrainMap(tileMap: MapTileKey[][]): void {
     this.terrainMap = tileMap.map((tileMapRow, yPosition) =>
       tileMapRow.map((_, xPosition) => {
         return {
           tileType: tileMap[yPosition][xPosition][TerrainManager.mapKeyIndex] as TerrainTileType,
           sprite: new Sprite({
             texture: this.getTexture(tileMap, xPosition, yPosition),
-            x: 16 * xPosition,
-            y: 16 * yPosition,
+            x: this.sizeOfSprite * xPosition,
+            y: this.sizeOfSprite * yPosition,
           }),
         };
       }),
