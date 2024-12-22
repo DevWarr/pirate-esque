@@ -59,6 +59,7 @@ frames.forEach((frame) => {
 
   if (matchingSlice) {
     // Create a new filename with the slice's name
+    // expected file name: `spritesheet_layer-{layer}_frame-{frame}.png`
     const newFilename = frame.filename.replace("layer-", `layer-${matchingSlice.name}`);
 
     // Add the frame to the updatedFrames object using the filename as the key

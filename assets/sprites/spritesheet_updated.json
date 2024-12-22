@@ -1,6 +1,6 @@
 {
   "frames": {
-    "spritesheet_layer-water_frame-0": {
+    "spritesheet_layer-land-top-left_frame-0": {
       "frame": {
         "x": 0,
         "y": 0,
@@ -15,70 +15,10 @@
         "h": 16
       }
     },
-    "spritesheet_layer-health-barrel_frame-0": {
-      "frame": {
-        "x": 16,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-map-piece_frame-0": {
-      "frame": {
-        "x": 32,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-boat-up_frame-0": {
-      "frame": {
-        "x": 48,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-land-top-left_frame-0": {
-      "frame": {
-        "x": 0,
-        "y": 16,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
     "spritesheet_layer-land-top-center_frame-0": {
       "frame": {
         "x": 16,
-        "y": 16,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -93,22 +33,7 @@
     "spritesheet_layer-land-top-right_frame-0": {
       "frame": {
         "x": 32,
-        "y": 16,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-boat-down_frame-0": {
-      "frame": {
-        "x": 48,
-        "y": 16,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -122,8 +47,8 @@
     },
     "spritesheet_layer-land-center-left_frame-0": {
       "frame": {
-        "x": 0,
-        "y": 32,
+        "x": 48,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -137,8 +62,8 @@
     },
     "spritesheet_layer-land-center-center_frame-0": {
       "frame": {
-        "x": 16,
-        "y": 32,
+        "x": 64,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -152,23 +77,8 @@
     },
     "spritesheet_layer-land-center-right_frame-0": {
       "frame": {
-        "x": 32,
-        "y": 32,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "duration": 100,
-      "trimmed": true,
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    "spritesheet_layer-boat-right_frame-0": {
-      "frame": {
-        "x": 48,
-        "y": 32,
+        "x": 80,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -182,8 +92,8 @@
     },
     "spritesheet_layer-land-bottom-left_frame-0": {
       "frame": {
-        "x": 0,
-        "y": 48,
+        "x": 96,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -197,8 +107,8 @@
     },
     "spritesheet_layer-land-bottom-center_frame-0": {
       "frame": {
-        "x": 16,
-        "y": 48,
+        "x": 112,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -212,8 +122,98 @@
     },
     "spritesheet_layer-land-bottom-right_frame-0": {
       "frame": {
-        "x": 32,
-        "y": 48,
+        "x": 128,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-water_frame-0": {
+      "frame": {
+        "x": 144,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-whirlpool_frame-0": {
+      "frame": {
+        "x": 160,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-health-barrel_frame-0": {
+      "frame": {
+        "x": 176,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-map-piece_frame-0": {
+      "frame": {
+        "x": 192,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-up_frame-0": {
+      "frame": {
+        "x": 208,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-down_frame-0": {
+      "frame": {
+        "x": 224,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -227,8 +227,23 @@
     },
     "spritesheet_layer-boat-left_frame-0": {
       "frame": {
-        "x": 48,
-        "y": 48,
+        "x": 240,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "duration": 100,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    "spritesheet_layer-boat-right_frame-0": {
+      "frame": {
+        "x": 256,
+        "y": 0,
         "w": 16,
         "h": 16
       },
@@ -247,14 +262,19 @@
     "image": "spritesheet.png",
     "format": "RGBA8888",
     "size": {
-      "w": 64,
-      "h": 64
+      "w": 272,
+      "h": 16
     },
     "scale": "1",
     "frameTags": [],
     "layers": [
       {
         "name": "Water",
+        "opacity": 255,
+        "blendMode": "normal"
+      },
+      {
+        "name": "Whirlpool",
         "opacity": 255,
         "blendMode": "normal"
       },
@@ -342,7 +362,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 0,
+              "x": 144,
               "y": 0,
               "w": 16,
               "h": 16
@@ -357,7 +377,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 16,
+              "x": 176,
               "y": 0,
               "w": 16,
               "h": 16
@@ -372,7 +392,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 32,
+              "x": 192,
               "y": 0,
               "w": 16,
               "h": 16
@@ -387,7 +407,7 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 48,
+              "x": 208,
               "y": 0,
               "w": 16,
               "h": 16
@@ -402,8 +422,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 48,
-              "y": 16,
+              "x": 224,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -418,7 +438,7 @@
             "frame": 0,
             "bounds": {
               "x": 0,
-              "y": 16,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -433,7 +453,7 @@
             "frame": 0,
             "bounds": {
               "x": 16,
-              "y": 16,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -448,7 +468,7 @@
             "frame": 0,
             "bounds": {
               "x": 32,
-              "y": 16,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -462,8 +482,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 0,
-              "y": 32,
+              "x": 48,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -477,8 +497,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 16,
-              "y": 32,
+              "x": 64,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -492,8 +512,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 32,
-              "y": 32,
+              "x": 80,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -507,8 +527,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 48,
-              "y": 32,
+              "x": 256,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -522,8 +542,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 0,
-              "y": 48,
+              "x": 96,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -537,8 +557,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 16,
-              "y": 48,
+              "x": 112,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -552,8 +572,8 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 32,
-              "y": 48,
+              "x": 128,
+              "y": 0,
               "w": 16,
               "h": 16
             }
@@ -567,8 +587,23 @@
           {
             "frame": 0,
             "bounds": {
-              "x": 48,
-              "y": 48,
+              "x": 240,
+              "y": 0,
+              "w": 16,
+              "h": 16
+            }
+          }
+        ]
+      },
+      {
+        "name": "whirlpool",
+        "color": "#0000ffff",
+        "keys": [
+          {
+            "frame": 0,
+            "bounds": {
+              "x": 160,
+              "y": 0,
               "w": 16,
               "h": 16
             }
