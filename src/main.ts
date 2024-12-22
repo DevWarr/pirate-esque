@@ -5,6 +5,7 @@ import { TerrainManager, startingMapArray } from "./managers/TerrainManager";
 import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
 import { ItemManager } from "./managers/ItemManager";
+import { HazardManager } from "./managers/HazardManager";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
@@ -21,8 +22,8 @@ TerrainManager.updateContainerWithNewMapSprites(mapLayer);
 const hazardLayer = new Container();
 app.stage.addChild(hazardLayer);
 
-// HazardManager.buildSpriteMapFromMapTiles(startingMapArray);
-// HazardManager.updateContainerWithNewMapSprites(hazardLayer);
+HazardManager.buildHazardMap(startingMapArray);
+HazardManager.updateContainerWithNewMapSprites(hazardLayer);
 
 const itemLayer = new Container();
 app.stage.addChild(itemLayer);
