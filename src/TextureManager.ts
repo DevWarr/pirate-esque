@@ -1,21 +1,28 @@
 import { Assets, Spritesheet, Texture } from "pixi.js";
 
 export enum TextureKey {
-  LAND_TOP_LEFT = "LAND_TOP_LEFT",
-  LAND_TOP_CENTER = "LAND_TOP_CENTER",
-  LAND_TOP_RIGHT = "LAND_TOP_RIGHT",
-  LAND_CENTER_LEFT = "LAND_CENTER_LEFT",
-  LAND_CENTER_CENTER = "LAND_CENTER_CENTER",
-  LAND_CENTER_RIGHT = "LAND_CENTER_RIGHT",
-  LAND_BOTTOM_LEFT = "LAND_BOTTOM_LEFT",
-  LAND_BOTTOM_CENTER = "LAND_BOTTOM_CENTER",
-  LAND_BOTTOM_RIGHT = "LAND_BOTTOM_RIGHT",
-  WATER = "WATER",
+  // Terrain
+  TERRAIN_LAND_TOP_LEFT = "TERRAIN_LAND_TOP_LEFT",
+  TERRAIN_LAND_TOP_CENTER = "TERRAIN_LAND_TOP_CENTER",
+  TERRAIN_LAND_TOP_RIGHT = "TERRAIN_LAND_TOP_RIGHT",
+  TERRAIN_LAND_CENTER_LEFT = "TERRAIN_LAND_CENTER_LEFT",
+  TERRAIN_LAND_CENTER_CENTER = "TERRAIN_LAND_CENTER_CENTER",
+  TERRAIN_LAND_CENTER_RIGHT = "TERRAIN_LAND_CENTER_RIGHT",
+  TERRAIN_LAND_BOTTOM_LEFT = "TERRAIN_LAND_BOTTOM_LEFT",
+  TERRAIN_LAND_BOTTOM_CENTER = "TERRAIN_LAND_BOTTOM_CENTER",
+  TERRAIN_LAND_BOTTOM_RIGHT = "TERRAIN_LAND_BOTTOM_RIGHT",
+  TERRAIN_WATER = "TERRAIN_WATER",
+
+  // Ship
   SHIP_RIGHT = "SHIP_RIGHT",
   SHIP_LEFT = "SHIP_LEFT",
   SHIP_DOWN = "SHIP_DOWN",
   SHIP_UP = "SHIP_UP",
+
+  // Hazards
   HAZARD_WHIRLPOOL = "HAZARD_WHIRLPOOL",
+
+  // Items
   ITEM_HEALTH_BARREL = "ITEM_HEALTH_BARREL",
   ITEM_MAP_PIECE = "ITEM_MAP_PIECE",
 }
@@ -38,16 +45,16 @@ export class TextureManager {
 
     this.textures = {
       // Underlayer tiles (water and land)
-      [TextureKey.LAND_TOP_LEFT]: spritesheet.textures["spritesheet_layer-land-top-left_frame-0"],
-      [TextureKey.LAND_TOP_CENTER]: spritesheet.textures["spritesheet_layer-land-top-center_frame-0"],
-      [TextureKey.LAND_TOP_RIGHT]: spritesheet.textures["spritesheet_layer-land-top-right_frame-0"],
-      [TextureKey.LAND_CENTER_LEFT]: spritesheet.textures["spritesheet_layer-land-center-left_frame-0"],
-      [TextureKey.LAND_CENTER_CENTER]: spritesheet.textures["spritesheet_layer-land-center-center_frame-0"],
-      [TextureKey.LAND_CENTER_RIGHT]: spritesheet.textures["spritesheet_layer-land-center-right_frame-0"],
-      [TextureKey.LAND_BOTTOM_LEFT]: spritesheet.textures["spritesheet_layer-land-bottom-left_frame-0"],
-      [TextureKey.LAND_BOTTOM_CENTER]: spritesheet.textures["spritesheet_layer-land-bottom-center_frame-0"],
-      [TextureKey.LAND_BOTTOM_RIGHT]: spritesheet.textures["spritesheet_layer-land-bottom-right_frame-0"],
-      [TextureKey.WATER]: spritesheet.textures["spritesheet_layer-water_frame-0"],
+      [TextureKey.TERRAIN_LAND_TOP_LEFT]: spritesheet.textures["spritesheet_layer-land-top-left_frame-0"],
+      [TextureKey.TERRAIN_LAND_TOP_CENTER]: spritesheet.textures["spritesheet_layer-land-top-center_frame-0"],
+      [TextureKey.TERRAIN_LAND_TOP_RIGHT]: spritesheet.textures["spritesheet_layer-land-top-right_frame-0"],
+      [TextureKey.TERRAIN_LAND_CENTER_LEFT]: spritesheet.textures["spritesheet_layer-land-center-left_frame-0"],
+      [TextureKey.TERRAIN_LAND_CENTER_CENTER]: spritesheet.textures["spritesheet_layer-land-center-center_frame-0"],
+      [TextureKey.TERRAIN_LAND_CENTER_RIGHT]: spritesheet.textures["spritesheet_layer-land-center-right_frame-0"],
+      [TextureKey.TERRAIN_LAND_BOTTOM_LEFT]: spritesheet.textures["spritesheet_layer-land-bottom-left_frame-0"],
+      [TextureKey.TERRAIN_LAND_BOTTOM_CENTER]: spritesheet.textures["spritesheet_layer-land-bottom-center_frame-0"],
+      [TextureKey.TERRAIN_LAND_BOTTOM_RIGHT]: spritesheet.textures["spritesheet_layer-land-bottom-right_frame-0"],
+      [TextureKey.TERRAIN_WATER]: spritesheet.textures["spritesheet_layer-water_frame-0"],
       // Ship textures
       [TextureKey.SHIP_RIGHT]: spritesheet.textures["spritesheet_layer-boat-right_frame-0"],
       [TextureKey.SHIP_LEFT]: spritesheet.textures["spritesheet_layer-boat-left_frame-0"],

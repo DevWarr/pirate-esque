@@ -39,10 +39,10 @@ export class TerrainManager {
   private static getTexture(tileMap: MapTileKey[][], x: number, y: number) {
     const terrainTileType: TerrainTileType = tileMap[y][x][TerrainManager.mapKeyIndex] as TerrainTileType;
     if (terrainTileType === TerrainTileType.WATER) {
-      return TextureManager.getTexture(TextureKey.WATER);
+      return TextureManager.getTexture(TextureKey.TERRAIN_WATER);
     }
 
-    return TextureManager.getTexture(TextureKey.LAND_CENTER_CENTER);
+    return TextureManager.getTexture(TextureKey.TERRAIN_LAND_CENTER_CENTER);
   }
 
   /**
