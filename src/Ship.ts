@@ -1,6 +1,6 @@
 import { Container, PointData, Sprite } from "pixi.js";
 import { TextureKey, TextureManager } from "./TextureManager";
-import { PositionVector2 } from "./gameTypes";
+import { PositionVector2 } from "./models/PositionVector2";
 import { Controller, ControllerButton } from "./controllers/Controller";
 import { TerrainManager } from "./managers/TerrainManager";
 
@@ -24,20 +24,20 @@ export class Ship {
   };
 
   private _currentSprite = this._spriteMap[ControllerButton.RIGHT];
+  private _previousMapPosition: PositionVector2 = new PositionVector2(0, 0);
+  private _mapPosition: PositionVector2 = new PositionVector2(0, 0);
+
+  constructor(private controller: Controller) {}
+
   public get currentSprite(): Sprite {
     return this._currentSprite;
   }
-
-  private _previousMapPosition: PositionVector2 = { x: 0, y: 0 };
-  private _mapPosition: PositionVector2 = { x: 0, y: 0 };
-
-  /** Returns a copy of the ships location (so the ship can't be forcefully moved) */
   public get mapPosition(): PositionVector2 {
-    return { ...this._mapPosition };
+    return this._mapPosition;
   }
 
   /** Updates the position of the ship within the map */
-  private updateMapPosition(newPosition: PositionVector2) {
+  set mapPosition(newPosition: PositionVector2) {
     this._previousMapPosition = this.mapPosition;
     this._mapPosition = newPosition;
   }
@@ -64,12 +64,6 @@ export class Ship {
     }
   }
 
-  private controller: Controller;
-
-  constructor(playerController: Controller) {
-    this.controller = playerController;
-  }
-
   /**
    * Returns new position of where the ship would move, given a direction.
    *
@@ -79,19 +73,22 @@ export class Ship {
   private calculateNewPosition(direction: ShipDirection): PositionVector2 {
     switch (direction) {
       case ControllerButton.RIGHT:
-        return { x: (this._mapPosition.x + 1) % TerrainManager.tileMapSize.w, y: this._mapPosition.y };
+        return new PositionVector2((this._mapPosition.x + 1) % TerrainManager.tileMapSize.w, this._mapPosition.y);
+
       case ControllerButton.LEFT:
-        return {
-          x: (TerrainManager.tileMapSize.w + this._mapPosition.x - 1) % TerrainManager.tileMapSize.w,
-          y: this._mapPosition.y,
-        };
+        return new PositionVector2(
+          (TerrainManager.tileMapSize.w + this._mapPosition.x - 1) % TerrainManager.tileMapSize.w,
+          this._mapPosition.y,
+        );
+
       case ControllerButton.DOWN:
-        return { x: this._mapPosition.x, y: (this._mapPosition.y + 1) % TerrainManager.tileMapSize.h };
+        return new PositionVector2(this._mapPosition.x, (this._mapPosition.y + 1) % TerrainManager.tileMapSize.h);
+
       case ControllerButton.UP:
-        return {
-          x: this._mapPosition.x,
-          y: (TerrainManager.tileMapSize.h + this._mapPosition.y - 1) % TerrainManager.tileMapSize.h,
-        };
+        return new PositionVector2(
+          this._mapPosition.x,
+          (TerrainManager.tileMapSize.h + this._mapPosition.y - 1) % TerrainManager.tileMapSize.h,
+        );
     }
   }
 
@@ -103,14 +100,14 @@ export class Ship {
     this._currentAnimationFrame += 1;
 
     // Determine where the ship's sprite should be
-    const distanceToMoveEachFrame: PositionVector2 = {
-      x: (this.mapPosition.x - this._previousMapPosition.x) * (Ship.SIZE_OF_SPRITE / Ship.TOTAL_ANIMATION_FRAMES),
-      y: (this.mapPosition.y - this._previousMapPosition.y) * (Ship.SIZE_OF_SPRITE / Ship.TOTAL_ANIMATION_FRAMES),
-    };
-    const newSpritePosition = {
-      x: this._currentSprite.position.x + distanceToMoveEachFrame.x,
-      y: this._currentSprite.position.y + distanceToMoveEachFrame.y,
-    };
+    const distanceToMoveEachFrame = new PositionVector2(
+      (this.mapPosition.x - this._previousMapPosition.x) * (Ship.SIZE_OF_SPRITE / Ship.TOTAL_ANIMATION_FRAMES),
+      (this.mapPosition.y - this._previousMapPosition.y) * (Ship.SIZE_OF_SPRITE / Ship.TOTAL_ANIMATION_FRAMES),
+    );
+    const newSpritePosition = new PositionVector2(
+      this._currentSprite.position.x + distanceToMoveEachFrame.x,
+      this._currentSprite.position.y + distanceToMoveEachFrame.y,
+    );
 
     if (
       Math.abs(this.mapPosition.x * Ship.SIZE_OF_SPRITE - newSpritePosition.x) >= Ship.SIZE_OF_SPRITE ||
@@ -119,10 +116,9 @@ export class Ship {
     ) {
       // If we're at the end of the animation, or the ship's sprite would be sent past its intended destination,
       // Put the sprite at it's destination, and stop moving
-      this.updateSpritePosition({
-        x: this.mapPosition.x * Ship.SIZE_OF_SPRITE,
-        y: this.mapPosition.y * Ship.SIZE_OF_SPRITE,
-      });
+      this.updateSpritePosition(
+        new PositionVector2(this.mapPosition.x * Ship.SIZE_OF_SPRITE, this.mapPosition.y * Ship.SIZE_OF_SPRITE),
+      );
       // reset the animation frame, and tell the ship we're no longer moving
       this._currentAnimationFrame = 0;
       this._isMoving = false;
@@ -144,13 +140,13 @@ export class Ship {
     const potentialNewPosition = this.calculateNewPosition(directionToMove);
     if (!TerrainManager.isLand(potentialNewPosition)) {
       this._isMoving = true;
-      this.updateMapPosition(potentialNewPosition);
+      this.mapPosition = potentialNewPosition;
     }
   }
 
-  public placeShipsInContainer(container: Container) {
+  public placeShipInContainer(container: Container) {
     // Make sure all sprites are in the right spot
-    this.updateMapPosition(this._mapPosition);
+    this.mapPosition = this._mapPosition;
 
     // Put all sprites in the container, and make them invisible
     Object.values(this._spriteMap).forEach((sprite) => {

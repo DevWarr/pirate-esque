@@ -25,7 +25,7 @@ const shipLayer = new Container();
 app.stage.addChild(shipLayer);
 
 const ship = new Ship(playerController);
-ship.placeShipsInContainer(shipLayer);
+ship.placeShipInContainer(shipLayer);
 
 const pauseLayer = new Container();
 app.stage.addChild(pauseLayer);

@@ -1,5 +1,12 @@
 import fs from "fs";
-import { PositionAndSizeVector, SizeVector2 } from "../gameTypes";
+import { SizeVector2 } from "../models/SizeVector2";
+
+export interface PositionAndSizeVector {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
 
 interface SpriteInfo {
   frame: PositionAndSizeVector;
