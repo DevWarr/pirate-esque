@@ -187,6 +187,24 @@
     "spriteSourceSize": { "x": 320, "y": 0, "w": 16, "h": 16 },
     "sourceSize": { "w": 16, "h": 16 },
     "duration": 100
+   },
+   {
+    "filename": "spritesheet_layer-_frame-0",
+    "frame": { "x": 336, "y": 0, "w": 16, "h": 16 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 336, "y": 0, "w": 16, "h": 16 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   },
+   {
+    "filename": "spritesheet_layer-_frame-0",
+    "frame": { "x": 352, "y": 0, "w": 16, "h": 16 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 352, "y": 0, "w": 16, "h": 16 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
    }
  ],
  "meta": {
@@ -194,7 +212,7 @@
   "version": "1.3.10.1-x64",
   "image": "spritesheet.png",
   "format": "RGBA8888",
-  "size": { "w": 336, "h": 16 },
+  "size": { "w": 368, "h": 16 },
   "scale": "1",
   "frameTags": [
   ],
@@ -202,8 +220,6 @@
    { "name": "Water with borders", "opacity": 255, "blendMode": "normal" },
    { "name": "Water", "opacity": 255, "blendMode": "normal" },
    { "name": "Water with waves", "opacity": 255, "blendMode": "normal" },
-   { "name": "unused01", "opacity": 255, "blendMode": "normal" },
-   { "name": "unused02", "opacity": 255, "blendMode": "normal" },
    { "name": "Whirlpool", "opacity": 255, "blendMode": "normal" },
    { "name": "Land 0", "opacity": 255, "blendMode": "normal" },
    { "name": "Land 1", "opacity": 255, "blendMode": "normal" },
@@ -214,6 +230,10 @@
    { "name": "Land 6", "opacity": 255, "blendMode": "normal" },
    { "name": "Land 7", "opacity": 255, "blendMode": "normal" },
    { "name": "Land 8", "opacity": 255, "blendMode": "normal" },
+   { "name": "land-peninsula-left", "opacity": 255, "blendMode": "normal" },
+   { "name": "land-peninsula-top", "opacity": 255, "blendMode": "normal" },
+   { "name": "land-peninsula-right", "opacity": 255, "blendMode": "normal" },
+   { "name": "land-peninsula-bottom", "opacity": 255, "blendMode": "normal" },
    { "name": "Boat Right", "opacity": 255, "blendMode": "normal" },
    { "name": "Boat Left", "opacity": 255, "blendMode": "normal" },
    { "name": "Boat Down", "opacity": 255, "blendMode": "normal" },
@@ -222,25 +242,29 @@
    { "name": "Map piece", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
-   { "name": "water-with-borders", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "health-barrel", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 240, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "map-piece", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "boat-up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 272, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "boat-down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 288, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "water-with-borders", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 208, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "health-barrel", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 272, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "map-piece", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 288, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "boat-up", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 304, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "boat-down", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 320, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-top-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-top-center", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 16, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-top-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-center-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 48, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-center-center", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 64, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-center-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "boat-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 320, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "boat-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 352, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-bottom-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-bottom-center", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 112, "y": 0, "w": 16, "h": 16 } }] },
    { "name": "land-bottom-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 128, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "boat-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 304, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "whirlpool", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "water", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 0, "w": 16, "h": 16 } }] },
-   { "name": "water-with-waves", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 0, "w": 16, "h": 16 } }] }
+   { "name": "boat-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 336, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "whirlpool", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 256, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "water", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 224, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "water-with-waves", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 240, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "land-peninsula-left", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 144, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "land-peninsula-top", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 160, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "land-peninsula-right", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 176, "y": 0, "w": 16, "h": 16 } }] },
+   { "name": "land-peninsula-bottom", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 192, "y": 0, "w": 16, "h": 16 } }] }
   ]
  }
 }
