@@ -9,6 +9,13 @@ export class HazardManager {
   private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static hazardMap: Record<SerializedPositionVector2, Hazard> = {};
 
+  /**
+   * Returns the hazard at the given position, or null if no hazard exists at the given position.
+   */
+  public static getHazardAtPosition(position: SerializedPositionVector2): Hazard | null {
+    return HazardManager.hazardMap[position] ?? null;
+  }
+
   private static getHazardTileType(tileMap: MapTileKey[][], x: number, y: number): HazardTileType {
     return tileMap[y][x][this.mapKeyIndex] as HazardTileType;
   }
