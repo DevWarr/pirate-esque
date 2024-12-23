@@ -1,8 +1,10 @@
 import { Container, PointData, Sprite } from "pixi.js";
 import { TextureKey, TextureManager } from "./managers/TextureManager";
-import { PositionVector2 } from "./models/PositionVector2";
+import { PositionVector2, SerializedPositionVector2 } from "./models/PositionVector2";
 import { Controller, ControllerButton } from "./controllers/Controller";
 import { TerrainManager } from "./managers/TerrainManager";
+import { ItemManager } from "./managers/ItemManager";
+import { HazardManager } from "./managers/HazardManager";
 
 /** type for the Ship direction. Dependent on the ControllerButton enum */
 type ShipDirection = Extract<
@@ -15,6 +17,8 @@ export class Ship {
   private static TOTAL_ANIMATION_FRAMES = 7;
   private static SIZE_OF_SPRITE = 16;
   private _currentAnimationFrame = 0;
+  private _maxShipHealth = 100;
+  private _shipHealth = 100;
 
   private _spriteMap: Record<ShipDirection, Sprite> = {
     [ControllerButton.UP]: new Sprite(TextureManager.getTexture(TextureKey.SHIP_UP)),
@@ -35,9 +39,32 @@ export class Ship {
   public get mapPosition(): PositionVector2 {
     return this._mapPosition;
   }
+  public get serializedPosition(): SerializedPositionVector2 {
+    return `${this.mapPosition.x},${this.mapPosition.y}`;
+  }
+  public get shipHealth(): number {
+    return this._shipHealth;
+  }
+  public set shipHealth(newHealth: number) {
+    if (newHealth <= 0) {
+      this._shipHealth = 0;
+      // Game over
+    } else if (newHealth > this._maxShipHealth) {
+      this._shipHealth = this._maxShipHealth;
+    } else {
+      this._shipHealth = newHealth;
+    }
+  }
+  public get maxShipHealth(): number {
+    return this._maxShipHealth;
+  }
 
-  /** Updates the position of the ship within the map */
-  set mapPosition(newPosition: PositionVector2) {
+  /**
+   * Updates the ship's position on the map.
+   *
+   * Also
+   */
+  updateShipPosition(newPosition: PositionVector2) {
     this._previousMapPosition = this.mapPosition;
     this._mapPosition = newPosition;
   }
@@ -134,19 +161,35 @@ export class Ship {
     if (this._isMoving) return;
 
     const directionToMove = this.controller.directionButtonDown;
-    if (directionToMove === null) return;
+    if (directionToMove === null) {
+      // If we're not moving, don't do anything
+      return;
+    }
     this.updateVisibleSprite(directionToMove);
 
     const potentialNewPosition = this.calculateNewPosition(directionToMove);
-    if (!TerrainManager.isLand(potentialNewPosition)) {
-      this._isMoving = true;
-      this.mapPosition = potentialNewPosition;
+    if (TerrainManager.isLand(potentialNewPosition)) {
+      // If the ship would move into land, don't move
+      return;
+    }
+
+    this._isMoving = true;
+    this.updateShipPosition(potentialNewPosition);
+    const potentialHazard = HazardManager.getHazardAtPosition(this.serializedPosition);
+    if (potentialHazard !== null) {
+      this.shipHealth -= 10;
+    }
+
+    const potentialItem = ItemManager.getItemAtPosition(this.serializedPosition);
+    if (potentialItem !== null) {
+      this.shipHealth += 10;
+      // potentialItem.sprite.visible = false;
     }
   }
 
-  public placeShipInContainer(container: Container) {
+  public placeShipInContainer(container: Container, position: PositionVector2 = new PositionVector2(0, 0)) {
     // Make sure all sprites are in the right spot
-    this.mapPosition = this._mapPosition;
+    this.updateShipPosition(position);
 
     // Put all sprites in the container, and make them invisible
     Object.values(this._spriteMap).forEach((sprite) => {

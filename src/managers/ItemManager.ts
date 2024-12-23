@@ -9,6 +9,13 @@ export class ItemManager {
   private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static itemMap: Record<SerializedPositionVector2, Item> = {};
 
+  /**
+   * Returns the item at the given position, or null if no item exists at the given position.
+   */
+  public static getItemAtPosition(position: SerializedPositionVector2): Item | null {
+    return ItemManager.itemMap[position] ?? null;
+  }
+
   private static getItemTileType(tileMap: MapTileKey[][], x: number, y: number): ItemTileType {
     return tileMap[y][x][this.mapKeyIndex] as ItemTileType;
   }
