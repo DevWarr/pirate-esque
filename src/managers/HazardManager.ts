@@ -6,7 +6,7 @@ import { Hazard, HazardTileType } from "../models/Hazard";
 
 export class HazardManager {
   private static mapKeyIndex = 1;
-  private static sizeOfSprite = 16;
+  private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static hazardMap: Record<SerializedPositionVector2, Hazard> = {};
 
   private static getHazardTileType(tileMap: MapTileKey[][], x: number, y: number): HazardTileType {
