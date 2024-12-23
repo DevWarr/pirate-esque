@@ -11,6 +11,10 @@ export enum TextureKey {
   TERRAIN_LAND_BOTTOM_LEFT = "TERRAIN_LAND_BOTTOM_LEFT",
   TERRAIN_LAND_BOTTOM_CENTER = "TERRAIN_LAND_BOTTOM_CENTER",
   TERRAIN_LAND_BOTTOM_RIGHT = "TERRAIN_LAND_BOTTOM_RIGHT",
+  TERRAIN_LAND_PENINSULA_LEFT = "TERRAIN_LAND_PENINSULA_LEFT",
+  TERRAIN_LAND_PENINSULA_TOP = "TERRAIN_LAND_PENINSULA_TOP",
+  TERRAIN_LAND_PENINSULA_RIGHT = "TERRAIN_LAND_PENINSULA_RIGHT",
+  TERRAIN_LAND_PENINSULA_BOTTOM = "TERRAIN_LAND_PENINSULA_BOTTOM",
   TERRAIN_WATER = "TERRAIN_WATER",
   TERRAIN_WATER_WITH_WAVES = "TERRAIN_WATER_WITH_WAVES",
   TERRAIN_WATER_WITH_BORDERS = "TERRAIN_WATER_WITH_BORDERS",
@@ -30,6 +34,7 @@ export enum TextureKey {
 }
 
 export class TextureManager {
+  public static readonly SIZE_OF_SPRITE = 16;
   private static textures: Record<string, Texture> = {};
 
   /**
@@ -59,6 +64,11 @@ export class TextureManager {
       [TextureKey.TERRAIN_WATER]: spritesheet.textures["spritesheet_layer-water_frame-0"],
       [TextureKey.TERRAIN_WATER_WITH_BORDERS]: spritesheet.textures["spritesheet_layer-water-with-borders_frame-0"],
       [TextureKey.TERRAIN_WATER_WITH_WAVES]: spritesheet.textures["spritesheet_layer-water-with-waves_frame-0"],
+      [TextureKey.TERRAIN_LAND_PENINSULA_LEFT]: spritesheet.textures["spritesheet_layer-land-peninsula-left_frame-0"],
+      [TextureKey.TERRAIN_LAND_PENINSULA_TOP]: spritesheet.textures["spritesheet_layer-land-peninsula-top_frame-0"],
+      [TextureKey.TERRAIN_LAND_PENINSULA_RIGHT]: spritesheet.textures["spritesheet_layer-land-peninsula-right_frame-0"],
+      [TextureKey.TERRAIN_LAND_PENINSULA_BOTTOM]:
+        spritesheet.textures["spritesheet_layer-land-peninsula-bottom_frame-0"],
       // Ship textures
       [TextureKey.SHIP_RIGHT]: spritesheet.textures["spritesheet_layer-boat-right_frame-0"],
       [TextureKey.SHIP_LEFT]: spritesheet.textures["spritesheet_layer-boat-left_frame-0"],

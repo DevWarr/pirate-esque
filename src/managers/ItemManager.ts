@@ -6,7 +6,7 @@ import { TextureKey, TextureManager } from "./TextureManager";
 
 export class ItemManager {
   private static mapKeyIndex = 2;
-  private static sizeOfSprite = 16;
+  private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static itemMap: Record<SerializedPositionVector2, Item> = {};
 
   private static getItemTileType(tileMap: MapTileKey[][], x: number, y: number): ItemTileType {
