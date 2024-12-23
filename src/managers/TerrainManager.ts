@@ -5,9 +5,29 @@ import { TextureKey, TextureManager } from "./TextureManager";
 import { Terrain, TerrainTileType } from "../models/Terrain";
 import { MapTileKey } from "../models/MapKey";
 
+// Top, right, bottom, left
+const landMap: Record<`${TerrainTileType},${TerrainTileType},${TerrainTileType},${TerrainTileType}`, TextureKey> = {
+  "_,_,0,0": TextureKey.TERRAIN_LAND_TOP_RIGHT,
+  "_,0,0,0": TextureKey.TERRAIN_LAND_TOP_CENTER,
+  "_,0,0,_": TextureKey.TERRAIN_LAND_TOP_LEFT,
+  "0,0,0,_": TextureKey.TERRAIN_LAND_CENTER_LEFT,
+  "0,0,0,0": TextureKey.TERRAIN_LAND_CENTER_CENTER,
+  "0,_,0,0": TextureKey.TERRAIN_LAND_CENTER_RIGHT,
+  "0,0,_,_": TextureKey.TERRAIN_LAND_BOTTOM_LEFT,
+  "0,0,_,0": TextureKey.TERRAIN_LAND_BOTTOM_CENTER,
+  "0,_,_,0": TextureKey.TERRAIN_LAND_BOTTOM_RIGHT,
+  "0,_,_,_": TextureKey.TERRAIN_LAND_PENINSULA_BOTTOM,
+  "_,0,_,_": TextureKey.TERRAIN_LAND_PENINSULA_LEFT,
+  "_,_,0,_": TextureKey.TERRAIN_LAND_PENINSULA_TOP,
+  "_,_,_,0": TextureKey.TERRAIN_LAND_PENINSULA_RIGHT,
+  "0,_,0,_": TextureKey.TERRAIN_LAND_CENTER_CENTER, // We don't have a texture for this, so we'll just use the center texture
+  "_,0,_,0": TextureKey.TERRAIN_LAND_CENTER_CENTER, // We don't have a texture for this, so we'll just use the center texture
+  "_,_,_,_": TextureKey.TERRAIN_LAND_CENTER_CENTER, // We don't have a texture for this, so we'll just use the center texture
+};
+
 export class TerrainManager {
   private static mapKeyIndex = 0;
-  private static sizeOfSprite = 16;
+  private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static terrainMap: Terrain[][] = [[]];
 
   /** returns the size of the tileMap. Assumes the tileMap is a rectangle */
@@ -18,19 +38,37 @@ export class TerrainManager {
     };
   }
 
-  private static getTerrainTileType(tileMap: MapTileKey[][], x: number, y: number) {
-    return tileMap[y][x][TerrainManager.mapKeyIndex] as TerrainTileType;
+  /**
+   * Returns the terrain tile type at the given x, y position.
+   *
+   * If no tile exists at the given position, it will return `TerrainTileType.WATER`
+   */
+  private static getTerrainTileType(tileMap: MapTileKey[][], x: number, y: number): TerrainTileType {
+    return (tileMap[y]?.[x]?.[TerrainManager.mapKeyIndex] as TerrainTileType) ?? TerrainTileType.WATER;
+  }
+
+  private static getWaterTexture() {
+    return TextureManager.getTexture(
+      Math.random() > 0.1 ? TextureKey.TERRAIN_WATER : TextureKey.TERRAIN_WATER_WITH_WAVES,
+    );
+  }
+
+  private static getLandTexture(tileMap: MapTileKey[][], x: number, y: number) {
+    const tileAbove = this.getTerrainTileType(tileMap, x, y - 1);
+    const tileBelow = this.getTerrainTileType(tileMap, x, y + 1);
+    const tileLeft = this.getTerrainTileType(tileMap, x - 1, y);
+    const tileRight = this.getTerrainTileType(tileMap, x + 1, y);
+
+    return landMap[`${tileAbove},${tileRight},${tileBelow},${tileLeft}`];
   }
 
   private static getTexture(tileMap: MapTileKey[][], x: number, y: number) {
     const terrainTileType: TerrainTileType = this.getTerrainTileType(tileMap, x, y);
     if (terrainTileType === TerrainTileType.WATER) {
-      return TextureManager.getTexture(
-        Math.random() > 0.1 ? TextureKey.TERRAIN_WATER : TextureKey.TERRAIN_WATER_WITH_WAVES,
-      );
+      return this.getWaterTexture();
     }
 
-    return TextureManager.getTexture(TextureKey.TERRAIN_LAND_CENTER_CENTER);
+    return TextureManager.getTexture(this.getLandTexture(tileMap, x, y));
   }
 
   /**
