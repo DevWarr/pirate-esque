@@ -70,4 +70,5 @@ app.ticker.add(() => {
   }
 
   ship.update();
+  HudLayer.health = ship.shipHealth;
 });
