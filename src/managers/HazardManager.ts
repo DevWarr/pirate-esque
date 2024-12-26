@@ -8,6 +8,11 @@ export class HazardManager {
   private static mapKeyIndex = 1;
   private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static hazardMap: Record<SerializedPositionVector2, Hazard> = {};
+  private static _pixiContainer: Container | null = null;
+
+  public static set pixiContainer(container: Container) {
+    this._pixiContainer = container;
+  }
 
   /**
    * Returns the hazard at the given position, or null if no hazard exists at the given position.
@@ -33,6 +38,9 @@ export class HazardManager {
   }
 
   public static buildHazardMap(tileMap: MapTileKey[][]): void {
+    // Clear the hazard map
+    this.hazardMap = {};
+
     tileMap.forEach((mapTileKeyRow, yPosition) =>
       mapTileKeyRow.forEach((_, xPosition) => {
         const hazardType = this.getHazardTileType(tileMap, xPosition, yPosition);
@@ -59,7 +67,10 @@ export class HazardManager {
    *
    * NOTE: this will remove all sprites from the given layer and update it in-place.
    */
-  public static updateContainerWithNewMapSprites(appContainer: Container) {
+  public static updateContainerWithNewMapSprites(appContainer: Container | null = this._pixiContainer) {
+    if (!appContainer) {
+      throw new Error("No PIXI container provided to update with new map sprites");
+    }
     appContainer.removeChildren();
     Object.values(this.hazardMap).forEach(({ sprite }) => appContainer.addChild(sprite));
   }

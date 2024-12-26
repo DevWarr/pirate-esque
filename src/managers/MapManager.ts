@@ -1,5 +1,8 @@
 import { highLevelMap, MapSection } from "../mapLayout";
 import { IPositionVector2, PositionVector2 } from "../models/PositionVector2";
+import { HazardManager } from "./HazardManager";
+import { ItemManager } from "./ItemManager";
+import { TerrainManager } from "./TerrainManager";
 
 export class MapManager {
   private static _map: MapSection[][] = highLevelMap;
@@ -10,12 +13,28 @@ export class MapManager {
   }
 
   /**
+   * @returns the current map section the player is in
+   */
+  public static get currentMapSection(): MapSection {
+    return this._map[this._currentMapPosition.y][this._currentMapPosition.x];
+  }
+
+  /**
    * Updates the current map position by the given x and y values
    *
    * Usually used with position vectors up, down, left, and right
    */
-  public static moveMapPosition({ x, y }: IPositionVector2): void {
-    MapManager._currentMapPosition = PositionVector2.add(this._currentMapPosition, { x, y });
+  public static updateMapPosition(newMapPosition: PositionVector2): void {
+    MapManager._currentMapPosition = newMapPosition;
+
+    TerrainManager.buildTerrainMap(this.currentMapSection);
+    TerrainManager.updateContainerWithNewMapSprites();
+
+    ItemManager.buildItemMap(this.currentMapSection);
+    ItemManager.updateContainerWithNewMapSprites();
+
+    HazardManager.buildHazardMap(this.currentMapSection);
+    HazardManager.updateContainerWithNewMapSprites();
   }
 
   /**

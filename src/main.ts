@@ -8,6 +8,7 @@ import { ItemManager } from "./managers/ItemManager";
 import { HazardManager } from "./managers/HazardManager";
 import { mapSection_0_0 } from "./mapLayout";
 import { HudLayer } from "./managers/HudManager";
+import { MapManager } from "./managers/MapManager";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
@@ -15,36 +16,46 @@ await app.init({ width: 320, height: 240 + 32 });
 app.renderer.view.resolution = 3;
 document.getElementById("app")!.appendChild(app.canvas);
 
-const hudLayer = new Container();
-hudLayer.height = 32;
-app.stage.addChild(hudLayer);
-HudLayer.buildHudLayer();
-HudLayer.addSpritesToHudLayer(hudLayer);
-
 const gameLayer = new Container();
 gameLayer.y = 32;
 app.stage.addChild(gameLayer);
 
 const mapLayer = new Container();
 gameLayer.addChild(mapLayer);
-TerrainManager.buildTerrainMap(mapSection_0_0);
-TerrainManager.updateContainerWithNewMapSprites(mapLayer);
+TerrainManager.pixiContainer = mapLayer;
+TerrainManager.buildTerrainMap(MapManager.currentMapSection);
+TerrainManager.updateContainerWithNewMapSprites();
 
 const hazardLayer = new Container();
 gameLayer.addChild(hazardLayer);
-HazardManager.buildHazardMap(mapSection_0_0);
-HazardManager.updateContainerWithNewMapSprites(hazardLayer);
+HazardManager.pixiContainer = hazardLayer;
+HazardManager.buildHazardMap(MapManager.currentMapSection);
+HazardManager.updateContainerWithNewMapSprites();
 
 const itemLayer = new Container();
 gameLayer.addChild(itemLayer);
-ItemManager.buildItemMap(mapSection_0_0);
-ItemManager.updateContainerWithNewMapSprites(itemLayer);
+ItemManager.pixiContainer = itemLayer;
+ItemManager.buildItemMap(MapManager.currentMapSection);
+ItemManager.updateContainerWithNewMapSprites();
 
 const shipLayer = new Container();
 gameLayer.addChild(shipLayer);
 const playerController = new Controller();
 const ship = new Ship(playerController);
 ship.placeShipInContainer(shipLayer);
+
+const hudLayer = new Container();
+hudLayer.height = 32;
+app.stage.addChild(hudLayer);
+const hudBackground = new Sprite(Texture.WHITE);
+hudBackground.width = app.canvas.width;
+hudBackground.height = 32;
+hudBackground.tint = 0x000000;
+hudBackground.alpha = 1;
+hudBackground.visible = true;
+hudLayer.addChild(hudBackground);
+HudLayer.buildHudLayer();
+HudLayer.addSpritesToHudLayer(hudLayer);
 
 const pauseLayer = new Container();
 app.stage.addChild(pauseLayer);

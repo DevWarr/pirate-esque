@@ -8,6 +8,11 @@ export class ItemManager {
   private static mapKeyIndex = 2;
   private static sizeOfSprite = TextureManager.SIZE_OF_SPRITE;
   private static itemMap: Record<SerializedPositionVector2, Item> = {};
+  private static _pixiContainer: Container | null = null;
+
+  public static set pixiContainer(container: Container) {
+    this._pixiContainer = container;
+  }
 
   /**
    * Returns the item at the given position, or null if no item exists at the given position.
@@ -37,6 +42,9 @@ export class ItemManager {
   }
 
   public static buildItemMap(tileMap: MapTileKey[][]): void {
+    // Clear the item map
+    this.itemMap = {};
+
     tileMap.forEach((mapTileKeyRow, yPosition) =>
       mapTileKeyRow.forEach((_, xPosition) => {
         const itemType = this.getItemTileType(tileMap, xPosition, yPosition);
@@ -63,7 +71,10 @@ export class ItemManager {
    *
    * NOTE: this will remove all sprites from the given layer and update it in-place.
    */
-  public static updateContainerWithNewMapSprites(appContainer: Container) {
+  public static updateContainerWithNewMapSprites(appContainer: Container | null = this._pixiContainer) {
+    if (!appContainer) {
+      throw new Error("No PIXI container provided to update with new map sprites");
+    }
     appContainer.removeChildren();
     Object.values(this.itemMap).forEach(({ sprite }) => appContainer.addChild(sprite));
   }

@@ -5,12 +5,20 @@ import { Controller, ControllerButton } from "./controllers/Controller";
 import { TerrainManager } from "./managers/TerrainManager";
 import { ItemManager } from "./managers/ItemManager";
 import { HazardManager } from "./managers/HazardManager";
+import { MapManager } from "./managers/MapManager";
 
 /** type for the Ship direction. Dependent on the ControllerButton enum */
 type ShipDirection = Extract<
   ControllerButton,
   ControllerButton.DOWN | ControllerButton.UP | ControllerButton.LEFT | ControllerButton.RIGHT
 >;
+
+const DIRECTION_TO_POSITION_VECTOR = {
+  [ControllerButton.DOWN]: PositionVector2.DOWN,
+  [ControllerButton.UP]: PositionVector2.UP,
+  [ControllerButton.LEFT]: PositionVector2.LEFT,
+  [ControllerButton.RIGHT]: PositionVector2.RIGHT,
+};
 
 export class Ship {
   private _isMoving: boolean = false;
@@ -91,34 +99,6 @@ export class Ship {
     }
   }
 
-  /**
-   * Returns new position of where the ship would move, given a direction.
-   *
-   * If the ship would move off the map, the postition will wrap around.
-   * (Moving left on position {x: 0, y: 0} would move you to position {x: [mapWidth-1], y: 0})
-   */
-  private calculateNewPosition(direction: ShipDirection): PositionVector2 {
-    switch (direction) {
-      case ControllerButton.RIGHT:
-        return new PositionVector2((this._mapPosition.x + 1) % TerrainManager.tileMapSize.w, this._mapPosition.y);
-
-      case ControllerButton.LEFT:
-        return new PositionVector2(
-          (TerrainManager.tileMapSize.w + this._mapPosition.x - 1) % TerrainManager.tileMapSize.w,
-          this._mapPosition.y,
-        );
-
-      case ControllerButton.DOWN:
-        return new PositionVector2(this._mapPosition.x, (this._mapPosition.y + 1) % TerrainManager.tileMapSize.h);
-
-      case ControllerButton.UP:
-        return new PositionVector2(
-          this._mapPosition.x,
-          (TerrainManager.tileMapSize.h + this._mapPosition.y - 1) % TerrainManager.tileMapSize.h,
-        );
-    }
-  }
-
   private moveShip(): void {
     // If we're not moving, well - don't move!
     if (!this._isMoving) return;
@@ -167,14 +147,36 @@ export class Ship {
     }
     this.updateVisibleSprite(directionToMove);
 
-    const potentialNewPosition = this.calculateNewPosition(directionToMove);
-    if (TerrainManager.isLand(potentialNewPosition)) {
+    const potentialTileToMoveTo = TerrainManager.getNeighboringMapTile(
+      MapManager.currentMapSection,
+      this.mapPosition,
+      DIRECTION_TO_POSITION_VECTOR[directionToMove],
+    );
+    if (
+      potentialTileToMoveTo.highLevelMapPosition === null ||
+      potentialTileToMoveTo.mapSectionPosition === null ||
+      !TerrainManager.isWater(potentialTileToMoveTo.mapTileKey)
+    ) {
       // If the ship would move into land, don't move
       return;
     }
 
+    this.updateShipPosition(potentialTileToMoveTo.mapSectionPosition);
     this._isMoving = true;
-    this.updateShipPosition(potentialNewPosition);
+    if (!MapManager.currentMapPosition.isEqualTo(potentialTileToMoveTo.highLevelMapPosition)) {
+      // If the ship would move into a new map section, update the map position
+      // and update the ship to be one tile away from the edge of the map section so we can see the transition
+      MapManager.updateMapPosition(potentialTileToMoveTo.highLevelMapPosition);
+      this._previousMapPosition = this._mapPosition.subtract(DIRECTION_TO_POSITION_VECTOR[directionToMove]);
+      this.updateSpritePosition(
+        new PositionVector2(
+          this._previousMapPosition.x * Ship.SIZE_OF_SPRITE,
+          this._previousMapPosition.y * Ship.SIZE_OF_SPRITE,
+        ),
+      );
+      console.log({ previous: this._previousMapPosition, current: this._mapPosition });
+    }
+
     const potentialHazard = HazardManager.getHazardAtPosition(this.serializedPosition);
     if (potentialHazard !== null) {
       this.shipHealth -= 10;
