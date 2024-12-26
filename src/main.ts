@@ -6,7 +6,7 @@ import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
 import { ItemManager } from "./managers/ItemManager";
 import { HazardManager } from "./managers/HazardManager";
-import { startingMapArray } from "./mapLayout";
+import { mapSection_0_0 } from "./mapLayout";
 import { HudLayer } from "./managers/HudManager";
 
 const app = new Application();
@@ -27,17 +27,17 @@ app.stage.addChild(gameLayer);
 
 const mapLayer = new Container();
 gameLayer.addChild(mapLayer);
-TerrainManager.buildTerrainMap(startingMapArray);
+TerrainManager.buildTerrainMap(mapSection_0_0);
 TerrainManager.updateContainerWithNewMapSprites(mapLayer);
 
 const hazardLayer = new Container();
 gameLayer.addChild(hazardLayer);
-HazardManager.buildHazardMap(startingMapArray);
+HazardManager.buildHazardMap(mapSection_0_0);
 HazardManager.updateContainerWithNewMapSprites(hazardLayer);
 
 const itemLayer = new Container();
 gameLayer.addChild(itemLayer);
-ItemManager.buildItemMap(startingMapArray);
+ItemManager.buildItemMap(mapSection_0_0);
 ItemManager.updateContainerWithNewMapSprites(itemLayer);
 
 const shipLayer = new Container();
