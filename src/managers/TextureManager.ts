@@ -34,7 +34,7 @@ export enum TextureKey {
 }
 
 export class TextureManager {
-  public static readonly SIZE_OF_SPRITE = 16;
+  public static readonly SIZE_OF_SPRITE = 32;
   private static textures: Record<string, Texture> = {};
 
   /**

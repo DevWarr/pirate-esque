@@ -23,7 +23,7 @@ const DIRECTION_TO_POSITION_VECTOR = {
 export class Ship {
   private _isMoving: boolean = false;
   private static TOTAL_ANIMATION_FRAMES = 7;
-  private static SIZE_OF_SPRITE = 16;
+  private static SIZE_OF_SPRITE = TextureManager.SIZE_OF_SPRITE;
   private _currentAnimationFrame = 0;
   private _maxShipHealth = 100;
   private _shipHealth = 100;
