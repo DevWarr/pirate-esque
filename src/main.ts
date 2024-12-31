@@ -6,18 +6,20 @@ import { Controller } from "./controllers/Controller";
 import { Ship } from "./Ship";
 import { ItemManager } from "./managers/ItemManager";
 import { HazardManager } from "./managers/HazardManager";
-import { mapSection_0_0 } from "./mapLayout";
 import { HudLayer } from "./managers/HudManager";
 import { MapManager } from "./managers/MapManager";
 
 const app = new Application();
 await TextureManager.loadSpritesheet();
-await app.init({ width: 320, height: 240 + 32 });
-app.renderer.view.resolution = 3;
+await app.init({
+  width: 640,
+  height: 480 + TextureManager.SIZE_OF_SPRITE * 2,
+});
+app.renderer.view.resolution = 1.5;
 document.getElementById("app")!.appendChild(app.canvas);
 
 const gameLayer = new Container();
-gameLayer.y = 32;
+gameLayer.y = TextureManager.SIZE_OF_SPRITE * 2;
 app.stage.addChild(gameLayer);
 
 const mapLayer = new Container();
@@ -45,11 +47,11 @@ const ship = new Ship(playerController);
 ship.placeShipInContainer(shipLayer);
 
 const hudLayer = new Container();
-hudLayer.height = 32;
+hudLayer.height = TextureManager.SIZE_OF_SPRITE * 2;
 app.stage.addChild(hudLayer);
 const hudBackground = new Sprite(Texture.WHITE);
 hudBackground.width = app.canvas.width;
-hudBackground.height = 32;
+hudBackground.height = TextureManager.SIZE_OF_SPRITE * 2;
 hudBackground.tint = 0x000000;
 hudBackground.alpha = 1;
 hudBackground.visible = true;
@@ -81,5 +83,5 @@ app.ticker.add(() => {
   }
 
   ship.update();
-  HudLayer.health = ship.shipHealth;
+  HudLayer.health = ship.shipHealth * 2;
 });
